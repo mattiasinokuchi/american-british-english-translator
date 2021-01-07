@@ -1,12 +1,20 @@
-const americanOnly = require('./american-only.js');
-const differences = require('./american-to-british-spelling.js');
+const americanSlang = require('./american-only.js');
+const english = require('./american-to-british-spelling.js');
 const americanToBritishTitles = require("./american-to-british-titles.js")
-const britishOnly = require('./british-only.js')
+const britishSlang = require('./british-only.js')
 
 class Translator {
 
-  // Function for something exciting...
-  toBritish (string) {
+  // Better luck this time
+  toBritishSlang(string) {
+    let translation = string;
+    let replace = "Mangoes";
+    let re = new RegExp(replace,"g");
+    return translation.replace(re, "Apples");
+  }
+
+  // This function turned out to be crap...
+/*  toBritish (string) {
     // ...captures !?. ...
     let endMark = string[string.length-1];
     let translation = [];
@@ -15,20 +23,33 @@ class Translator {
       .slice(0, string.length-1)
       // ...splits string to an array...
       .split(' ');
-    //console.log(string, array);
+    console.log(string, array);
+    // ...each word is...
     array.forEach(function (element) {
-      if (differences.hasOwnProperty(element)) {
-        //console.log(differences[element]);
-        // ...adds translated word to translation...
-        translation.push(differences[element]);
-      } else {
-        // ...adds not translated words to translation...
-        translation.push(element);
+      // ...checked for American slang...
+      if (americanSlang.hasOwnProperty(element)) {
+        console.log(americanSlang[element]);
+        // ...and changed to formal American english...
+        element = americanSlang[element];
       }
+      // ...checked for American english...
+      if (english.hasOwnProperty(element)) {
+        console.log(english[element]);
+        // ...and translated to British english...
+        element = english[element];
+      }
+      // ...checked...
+      if (britishSlang.hasOwnProperty(element)) {
+        console.log(britishSlang[element]);
+        // ...and changed to British slang...
+        element = britishSlang[element];
+      }
+      // ...and added to the translation...
+      translation.push(element);
     });
-    // ...returns translated sentence after adding end mark
+    // ...returns translated sentence after adding the end mark
     return translation.join(' ').concat(endMark);
-  }
+}*/
 
 }
 

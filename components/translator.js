@@ -9,10 +9,10 @@ class Translator {
   toBritish (string) {
     let translation = [];
     let array = string.split(' ');
-    console.log(array);
+    //console.log(array);
     array.forEach(function (element) {
       if (differences.hasOwnProperty(element)) {
-        console.log(differences[element]);
+        //console.log(differences[element]);
         translation.push(differences[element]);
       } else {
         translation.push(element);

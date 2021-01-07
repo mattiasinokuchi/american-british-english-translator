@@ -288,6 +288,7 @@ module.exports = {
   "conceptualized": "conceptualised",
   "conceptualizes": "conceptualises",
   "conceptualizing": "conceptualising",
+  "condo": "flat",
   "connection": "connexion",
   "connections": "connexions",
   "contextualize": "contextualise",

@@ -16,7 +16,7 @@ suite('Unit Tests', () => {
   });
 
   test('We had...', function(done) {
-    assert.equal(translator.toBritish("'We had a party at my friend's condo.'"), "'We had a party at my friend's flat.'");
+    assert.equal(translator.toBritish("We had a party at my friend's condo."), "We had a party at my friend's flat.");
     done();
   });
 

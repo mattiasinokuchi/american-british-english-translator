@@ -20,4 +20,9 @@ suite('Unit Tests', () => {
     done();
   });
 
+  test('Can you...', function(done) {
+    assert.equal(translator.toBritish("Can you toss this in the trashcan for me?"), "Can you toss this in the bin for me?");
+    done();
+  });
+
 });

@@ -1581,6 +1581,7 @@ module.exports = {
   "traveling": "travelling",
   "travelog": "travelogue",
   "travelogs": "travelogues",
+  "trashcan": "bin",
   "trialed": "trialled",
   "trialing": "trialling",
   "tricolor": "tricolour",

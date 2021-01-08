@@ -35,4 +35,9 @@ suite('Unit Tests', () => {
     done();
   });
 
+  test('To play...', function(done) {
+    assert.equal(translator.toBritish("To play hooky means to skip class or work."), "To bunk off means to skip class or work.");
+    done();
+  });
+
 });

@@ -40,4 +40,9 @@ suite('Unit Tests', () => {
     done();
   });
 
+  test('No Mr...', function(done) {
+    assert.equal(translator.toBritish("No Mr. Bond, I expect you to die."), "No Mr Bond, I expect you to die.");
+    done();
+  });
+
 });

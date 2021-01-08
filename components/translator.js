@@ -1,5 +1,5 @@
 const americanSlang = require('./american-only.js');
-const english = require('./american-to-british-spelling.js');
+const americanBritish = require('./american-to-british-spelling.js');
 const americanToBritishTitles = require("./american-to-british-titles.js")
 const britishSlang = require('./british-only.js')
 
@@ -8,9 +8,26 @@ class Translator {
   // Better luck this time
   toBritishSlang(string) {
     let translation = string;
-    let replace = "Mangoes";
-    let re = new RegExp(replace,"g");
-    return translation.replace(re, "Apples");
+    console.log(translation);
+    Object.keys(americanSlang).forEach(function (element) {
+      let slang = new RegExp("\\b"+element+"\\b","g");
+      console.log(slang);
+      let formal = americanSlang[element];
+      translation = translation.replace(slang, formal);
+    });
+    console.log(translation);
+    Object.keys(americanBritish).forEach(function (element) {
+      let american = new RegExp(element,"g");
+      let british = americanBritish[element];
+      translation = translation.replace(american, british);
+    });
+    console.log(translation);
+    /*Object.keys(britishSlang).forEach(function (element) {
+      let formal = new RegExp(element,"g");
+      let slang = britishSlang[element];
+      translation = translation.replace(formal, slang);
+    });*/
+    return translation;
   }
 
   // This function turned out to be crap...

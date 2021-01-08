@@ -45,4 +45,9 @@ suite('Unit Tests', () => {
     done();
   });
 
+  test('Dr Grosh...', function(done) {
+    assert.equal(translator.toBritish("Dr. Grosh will see you now."), "Dr Grosh will see you now.");
+    done();
+  });  
+
 });

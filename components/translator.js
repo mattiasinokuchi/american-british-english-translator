@@ -30,9 +30,13 @@ class Translator {
       }
     });
     //console.log(translation);
+    let americanTime = translation.match(/\d\d:\d\d/ig);
+    if (americanTime) {
+      let britishTime = americanTime[0].slice(0,2)+'.'+americanTime[0].slice(3);
+      translation = translation.replace(/\d\d:\d\d/ig, britishTime);
+    }
     return translation;
   }
-
 }
 
 module.exports = Translator;

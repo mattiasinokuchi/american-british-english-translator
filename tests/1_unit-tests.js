@@ -50,4 +50,9 @@ suite('Unit Tests', () => {
     done();
   });  
 
+  test('Lunch is...', function(done) {
+    assert.equal(translator.toBritish("Lunch is at 12:15 today."), "Lunch is at 12.15 today.");
+    done();
+  });  
+
 });

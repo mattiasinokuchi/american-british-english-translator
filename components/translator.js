@@ -1,7 +1,7 @@
 const americanSlangToFormal = require('./american-only.js');
 const americanToEnglish = require('./american-to-british-spelling.js');
 const titles = require("./american-to-british-titles.js")
-const britishSlang = require('./british-only.js')
+const englishSlangToFormal = require('./british-only.js')
 
 class Translator {
 
@@ -12,6 +12,12 @@ class Translator {
     english = convertTime(english);
     return english;
   }
+
+  toAmerican(englishSlang) {
+    let english = translate(englishSlang, englishSlangToFormal);
+    return english;
+  }
+
 }
 
 module.exports = Translator;

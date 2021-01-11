@@ -71,6 +71,11 @@ suite('Unit Tests', () => {
       done();
     });
 
+    test('First...', function(done) {
+      assert.equal(translator.toAmerican("First, caramelise the onions."), "First, caramelize the onions.");
+      done();
+    });
+
   });
 
 });

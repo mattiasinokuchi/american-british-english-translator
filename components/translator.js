@@ -15,7 +15,8 @@ class Translator {
 
   toAmerican(englishSlang) {
     let english = translate(englishSlang, englishSlangToFormal);
-    return english;
+    let american = translateBackwards(english, americanToEnglish);
+    return american;
   }
 
 }
@@ -26,6 +27,17 @@ function translate(from, connection) {
   let translation = from;
   Object.keys(connection).forEach(function (element) {
     let match = new RegExp("\\b"+element+"\\b","ig");
+    let newWord = connection[element];
+    translation = translation.replace(match, newWord);
+  });
+  return translation;
+}
+
+function translateBackwards(from, connection) {
+  let translation = from;
+  Object.values(connection).forEach(function (element) {
+    let match = new RegExp("\\b"+element+"\\b","ig");
+    let key = connection.find(el => el[1] == match);
     let newWord = connection[element];
     translation = translation.replace(match, newWord);
   });

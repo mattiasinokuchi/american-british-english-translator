@@ -1,47 +1,50 @@
-const americanSlang = require('./american-only.js');
-const americanBritish = require('./american-to-british-spelling.js');
+const americanSlangToFormal = require('./american-only.js');
+const americanToEnglish = require('./american-to-british-spelling.js');
 const titles = require("./american-to-british-titles.js")
 const britishSlang = require('./british-only.js')
 
 class Translator {
 
-  // Better luck this time
-  toBritish(string) {
-    let translation = toFormal(string);
-    function toFormal(string) {
-      let translation = string;
-      Object.keys(americanSlang).forEach(function (element) {
-        let slang = new RegExp("\\b"+element+"\\b","ig");
-        let formal = americanSlang[element];
-        translation = translation.replace(slang, formal);
-      });
-      return translation;
-    }
-    //console.log(translation);
-    
-    //console.log(translation);
-    Object.keys(americanBritish).forEach(function (element) {
-      let american = new RegExp("\\b"+element+"\\b","ig");
-      let british = americanBritish[element];
-      translation = translation.replace(american, british);
-    });
-    //console.log(translation);
-    Object.keys(titles).forEach(function (element) {
-      let americanTitle = new RegExp(element,"ig");
-      let match = translation.match(americanTitle);
-      if (match) {
-        let britishTitle = match[0].slice(0, match.length-2);
-        translation = translation.replace(americanTitle, britishTitle);
-      }
-    });
-    //console.log(translation);
-    let americanTime = translation.match(/\d\d:\d\d/ig);
-    if (americanTime) {
-      let britishTime = americanTime[0].slice(0,2)+'.'+americanTime[0].slice(3);
-      translation = translation.replace(/\d\d:\d\d/ig, britishTime);
-    }
-    return translation;
+  toEnglish(americanSlang) {
+    let american = translate(americanSlang, americanSlangToFormal);
+    let english = translate(american, americanToEnglish);
+    english = convertTitles(english);
+    english = convertTime(english);
+    return english;
   }
 }
 
 module.exports = Translator;
+
+function translate(from, connection) {
+  let translation = from;
+  Object.keys(connection).forEach(function (element) {
+    let match = new RegExp("\\b"+element+"\\b","ig");
+    let newWord = connection[element];
+    translation = translation.replace(match, newWord);
+  });
+  return translation;
+}
+
+function convertTitles(string) {
+  let conversion = string;
+  Object.keys(titles).forEach(function (element) {
+    let americanTitle = new RegExp(element,"ig");
+    let match = string.match(americanTitle);
+    if (match) {
+      let britishTitle = match[0].slice(0, match.length-2);
+      conversion = conversion.replace(americanTitle, britishTitle);
+    }
+  });
+  return conversion;
+}
+
+function convertTime(string) {
+  let conversion = string;
+  let americanTime = string.match(/\d\d:\d\d/ig);
+  if (americanTime) {
+    let britishTime = americanTime[0].slice(0,2)+'.'+americanTime[0].slice(3);
+    conversion = conversion.replace(/\d\d:\d\d/ig, britishTime);
+  }
+  return conversion;
+}

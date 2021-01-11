@@ -66,6 +66,11 @@ suite('Unit Tests', () => {
       done();
     });
 
+    test('Paracetamol...', function(done) {
+      assert.equal(translator.toAmerican("Paracetamol takes up to an hour to work."), "Tylenol takes up to an hour to work.");
+      done();
+    });
+
   });
 
 });

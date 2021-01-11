@@ -7,13 +7,18 @@ class Translator {
 
   // Better luck this time
   toBritish(string) {
-    let translation = string;
+    let translation = toFormal(string);
+    function toFormal(string) {
+      let translation = string;
+      Object.keys(americanSlang).forEach(function (element) {
+        let slang = new RegExp("\\b"+element+"\\b","ig");
+        let formal = americanSlang[element];
+        translation = translation.replace(slang, formal);
+      });
+      return translation;
+    }
     //console.log(translation);
-    Object.keys(americanSlang).forEach(function (element) {
-      let slang = new RegExp("\\b"+element+"\\b","ig");
-      let formal = americanSlang[element];
-      translation = translation.replace(slang, formal);
-    });
+    
     //console.log(translation);
     Object.keys(americanBritish).forEach(function (element) {
       let american = new RegExp("\\b"+element+"\\b","ig");

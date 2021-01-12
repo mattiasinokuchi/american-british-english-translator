@@ -96,6 +96,11 @@ suite('Unit Tests', () => {
       done();
     });
 
+    test("Have you...", function(done) {
+      assert.equal(translator.toAmerican("Have you met Mrs Kalyani?"), "Have you met Mrs. Kalyani?");
+      done();
+    });
+
   });
 
 });

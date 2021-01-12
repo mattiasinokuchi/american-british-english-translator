@@ -91,6 +91,11 @@ suite('Unit Tests', () => {
       done();
     });
 
+    test("The car...", function(done) {
+      assert.equal(translator.toAmerican("The car boot sale at Boxted Airfield was called off."), "The swap meet at Boxted Airfield was called off.");
+      done();
+    });
+
   });
 
 });

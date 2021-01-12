@@ -25,10 +25,16 @@ module.exports = Translator;
 
 function translate(from, connection) {
   let translation = from;
+  //console.log(from);
   Object.keys(connection).forEach(function (element) {
-    let match = new RegExp("\\b"+element+"\\b","ig");
-    let newWord = connection[element];
-    translation = translation.replace(match, newWord);
+    // finds element without letters or hyphens on either side
+    let match = new RegExp("(?<!\\w|-)"+element+"(?!\\w|-)", "ig");
+    if (match.test(translation)) {
+      let newWord = connection[element];
+      translation = translation.replace(match, newWord);
+      //console.log(element, "->", newWord);
+      //console.log(translation);
+    }
   });
   return translation;
 }
@@ -36,7 +42,7 @@ function translate(from, connection) {
 function translateBackwards(from, connection) {
   let translation = from;
   Object.values(connection).forEach(function (element) {
-    let match = new RegExp("\\b"+element+"\\b","ig");
+    let match = new RegExp("(?<!\\w|-)"+element+"(?!\\w|-)", "ig");
     if (match.test(translation)) {
       let newWord = Object.keys(connection).find(key => connection[key] === element);
       translation = translation.replace(match, newWord);

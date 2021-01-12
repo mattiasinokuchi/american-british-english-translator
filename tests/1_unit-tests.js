@@ -81,6 +81,11 @@ suite('Unit Tests', () => {
       done();
     });
 
+    test('I had...', function(done) {
+      assert.equal(translator.toAmerican("I had a bicky then went to the chippy."), "I had a cookie then went to the fish-and-chip shop.");
+      done();
+    });
+
   });
 
 });

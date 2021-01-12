@@ -76,6 +76,11 @@ suite('Unit Tests', () => {
       done();
     });
 
+    test('I spent...', function(done) {
+      assert.equal(translator.toAmerican("I spent the bank holiday at the funfair."), "I spent the public holiday at the carnival.");
+      done();
+    });
+
   });
 
 });

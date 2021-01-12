@@ -42,6 +42,7 @@ function translate(from, connection) {
 function translateBackwards(from, connection) {
   let translation = from;
   Object.values(connection).forEach(function (element) {
+    // finds element without letters or hyphens on either side
     let match = new RegExp("(?<!\\w|-)"+element+"(?!\\w|-)", "ig");
     if (match.test(translation)) {
       let newWord = Object.keys(connection).find(key => connection[key] === element);

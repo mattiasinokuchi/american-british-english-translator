@@ -86,6 +86,11 @@ suite('Unit Tests', () => {
       done();
     });
 
+    test("I've just...", function(done) {
+      assert.equal(translator.toAmerican("I've just got bits and bobs in my bum bag."), "I've just got odds and ends in my fanny pack.");
+      done();
+    });
+
   });
 
 });

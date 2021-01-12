@@ -37,9 +37,10 @@ function translateBackwards(from, connection) {
   let translation = from;
   Object.values(connection).forEach(function (element) {
     let match = new RegExp("\\b"+element+"\\b","ig");
-    let key = connection.find(el => el[1] == match);
-    let newWord = connection[element];
-    translation = translation.replace(match, newWord);
+    if (match.test(translation)) {
+      let newWord = Object.keys(connection).find(key => connection[key] === element);
+      translation = translation.replace(match, newWord);
+    }
   });
   return translation;
 }

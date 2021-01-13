@@ -8,7 +8,7 @@ class Translator {
   toEnglish(americanSlang) {
     let american = translate(americanSlang, americanSlangToFormal);
     let english = translate(american, americanToEnglish);
-    english = convertTitles(english);
+    english = translate(english, titles);
     english = convertTime(english);
     return english;
   }
@@ -16,6 +16,7 @@ class Translator {
   toAmerican(englishSlang) {
     let english = translate(englishSlang, englishSlangToFormal);
     let american = translateBackwards(english, americanToEnglish);
+    american = translateBackwards(american, titles);
     return american;
   }
 
@@ -50,19 +51,6 @@ function translateBackwards(from, connection) {
     }
   });
   return translation;
-}
-
-function convertTitles(string) {
-  let conversion = string;
-  Object.keys(titles).forEach(function (element) {
-    let americanTitle = new RegExp(element,"ig");
-    let match = string.match(americanTitle);
-    if (match) {
-      let britishTitle = match[0].slice(0, match.length-2);
-      conversion = conversion.replace(americanTitle, britishTitle);
-    }
-  });
-  return conversion;
 }
 
 function convertTime(string) {

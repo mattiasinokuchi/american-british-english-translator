@@ -101,6 +101,11 @@ suite('Unit Tests', () => {
       done();
     });
 
+    test("Prof Joyner...", function(done) {
+      assert.equal(translator.toAmerican("Prof Joyner of King's College, London."), "Prof. Joyner of King's College, London.");
+      done();
+    });
+
   });
 
 });

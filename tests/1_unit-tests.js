@@ -113,4 +113,12 @@ suite('Unit Tests', () => {
 
   });
 
+  suite('Highlight translation', () => {
+
+    test("Tea time...", function(done) {
+      done();
+    });
+
+  });
+
 });

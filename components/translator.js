@@ -25,14 +25,13 @@ class Translator {
 
 module.exports = Translator;
 
-function translate(from, connection) {
-  let translation = from;
-  //console.log(from);
-  Object.keys(connection).forEach(function (element) {
+function translate(string, fromTo) {
+  let translation = string;
+  Object.keys(fromTo).forEach(function (element) {
     // finds element without letters or hyphens on either side
     let match = new RegExp("(?<!\\w|-)"+element+"(?!\\w|-)", "ig");
     if (match.test(translation)) {
-      let newWord = connection[element];
+      let newWord = fromTo[element];
       translation = translation.replace(match, newWord);
       //console.log(element, "->", newWord);
       //console.log(translation);
@@ -41,13 +40,13 @@ function translate(from, connection) {
   return translation;
 }
 
-function translateBackwards(from, connection) {
-  let translation = from;
-  Object.values(connection).forEach(function (element) {
+function translateBackwards(string, fromTo) {
+  let translation = string;
+  Object.values(fromTo).forEach(function (element) {
     // finds element without letters or hyphens on either side
     let matches = new RegExp("(?<!\\w|-)"+element+"(?!\\w|-)", "ig");
     if (matches.test(translation)) {
-      let newWord = Object.keys(connection).find(key => connection[key] === element);
+      let newWord = Object.keys(fromTo).find(key => fromTo[key] === element);
       translation = translation.replace(matches, newWord);
     }
   });

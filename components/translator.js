@@ -31,8 +31,8 @@ function translate(string, fromTo) {
     // finds element without letters or hyphens on either side
     let match = new RegExp("(?<!\\w|-)"+element+"(?!\\w|-)", "ig");
     if (match.test(translation)) {
-      let newWord = fromTo[element];
-      translation = translation.replace(match, newWord);
+      let newHighlightedWord = "<span class='highlight'>" + fromTo[element] + "</span>";
+      translation = translation.replace(match, newHighlightedWord);
       //console.log(element, "->", newWord);
       //console.log(translation);
     }
@@ -47,7 +47,8 @@ function translateBackwards(string, fromTo) {
     let matches = new RegExp("(?<!\\w|-)"+element+"(?!\\w|-)", "ig");
     if (matches.test(translation)) {
       let newWord = Object.keys(fromTo).find(key => fromTo[key] === element);
-      translation = translation.replace(matches, newWord);
+      let newHighlightedWord = "<span class='highlight'>" + newWord + "</span>"; 
+      translation = translation.replace(matches, newHighlightedWord);
     }
   });
   return translation;

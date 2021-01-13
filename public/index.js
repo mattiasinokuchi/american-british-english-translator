@@ -6,8 +6,8 @@ const translateHandler = async () => {
   const translatedArea = document.getElementById("translated-sentence");
   
   const stuff = {"text": textArea.value, "locale": localeArea.value};
-  errorArea.innerText = "";
-  translatedArea.innerText = "";
+  errorArea.innerHTML = "";
+  translatedArea.innerHTML = "";
 
   const data = await fetch("/api/translate", {
     method: "POST",

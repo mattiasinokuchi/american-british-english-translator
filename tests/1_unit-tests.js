@@ -106,6 +106,11 @@ suite('Unit Tests', () => {
       done();
     });
 
+    test("Tea time...", function(done) {
+      assert.equal(translator.toAmerican("Tea time is usually around 4 or 4.30."), "Tea time is usually around 4 or 4:30.");
+      done();
+    });
+
   });
 
 });

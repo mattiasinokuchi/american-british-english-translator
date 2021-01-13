@@ -17,6 +17,7 @@ class Translator {
     let english = translate(englishSlang, englishSlangToFormal);
     let american = translateBackwards(english, americanToEnglish);
     american = translateBackwards(american, titles);
+    american = convertTime(american);
     return american;
   }
 
@@ -44,10 +45,10 @@ function translateBackwards(from, connection) {
   let translation = from;
   Object.values(connection).forEach(function (element) {
     // finds element without letters or hyphens on either side
-    let match = new RegExp("(?<!\\w|-)"+element+"(?!\\w|-)", "ig");
-    if (match.test(translation)) {
+    let matches = new RegExp("(?<!\\w|-)"+element+"(?!\\w|-)", "ig");
+    if (matches.test(translation)) {
       let newWord = Object.keys(connection).find(key => connection[key] === element);
-      translation = translation.replace(match, newWord);
+      translation = translation.replace(matches, newWord);
     }
   });
   return translation;
@@ -55,10 +56,12 @@ function translateBackwards(from, connection) {
 
 function convertTime(string) {
   let conversion = string;
-  let americanTime = string.match(/\d\d:\d\d/ig);
-  if (americanTime) {
-    let britishTime = americanTime[0].slice(0,2)+'.'+americanTime[0].slice(3);
-    conversion = conversion.replace(/\d\d:\d\d/ig, britishTime);
+  let americanTimeMatches = /(?<=\d):(?=\d\d)/ig;
+  let englishTimeMatches = /(?<=\d)\.(?=\d\d)/ig;
+  if (americanTimeMatches.test(string)) {
+    conversion = string.replace(americanTimeMatches, '.');
+  } else if (englishTimeMatches.test(string)) {
+    conversion = string.replace(englishTimeMatches, ':');
   }
   return conversion;
 }

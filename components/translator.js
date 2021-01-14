@@ -33,8 +33,6 @@ function translate(string, fromTo) {
     if (match.test(translation)) {
       let newHighlightedWord = "<span class='highlight'>" + fromTo[element] + "</span>";
       translation = translation.replace(match, newHighlightedWord);
-      //console.log(element, "->", newWord);
-      //console.log(translation);
     }
   });
   return translation;
@@ -56,10 +54,10 @@ function translateBackwards(string, fromTo) {
 
 function convertTime(string) {
   let conversion = string;
-  let americanTimeMatches = /(?<=\d):(?=\d\d)/ig;
+  let americanTimeMatches = /([0-2]?[1-9]):([0-5]\d)/gm;
   let englishTimeMatches = /(?<=\d)\.(?=\d\d)/ig;
   if (americanTimeMatches.test(string)) {
-    conversion = string.replace(americanTimeMatches, '.');
+    conversion = string.replace(americanTimeMatches, '$1'+'.'+'$2');
   } else if (englishTimeMatches.test(string)) {
     conversion = string.replace(englishTimeMatches, ':');
   }

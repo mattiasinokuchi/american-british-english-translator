@@ -53,4 +53,19 @@ suite('Functional Tests', () => {
       done();
     });
   });
+
+  test('Missing locale field', function(done) {
+    chai.request(server)
+    .post('/api/translate')
+    .send({
+      text: "Mangoes are my favorite fruit.",
+      locale: ""
+    })
+    .end(function (err, res) {
+      assert.equal(res.status, 200);
+      assert.isObject(res.body, true);
+      assert.deepEqual(res.body, { error: 'Required field(s) missing' });
+      done();
+    });
+  });
 });

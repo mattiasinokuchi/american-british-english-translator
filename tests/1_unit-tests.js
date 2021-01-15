@@ -53,7 +53,7 @@ suite('Unit Tests', () => {
     });  
 
     test('Lunch is...', function(done) {
-      assert.equal(translator.toEnglish("Lunch is at 12:15 today."), "Lunch is at 12.15 today.");
+      assert.equal(translator.toEnglish("Lunch is at 12:15 today."), "Lunch is at <span class=\'highlight\'>12.15</span> today.");
       done();
     });
 
@@ -107,7 +107,7 @@ suite('Unit Tests', () => {
     });
 
     test("Tea time...", function(done) {
-      assert.equal(translator.toAmerican("Tea time is usually around 4 or 4.30."), "Tea time is usually around 4 or 4:30.");
+      assert.equal(translator.toAmerican("Tea time is usually around 4 or 4.30."), "Tea time is usually around 4 or <span class=\'highlight\'>4:30</span>.");
       done();
     });
 
@@ -115,7 +115,23 @@ suite('Unit Tests', () => {
 
   suite('Highlight translation', () => {
 
-    test("Tea time...", function(done) {
+    test("Mangoes...", function(done) {
+      assert.equal(translator.toEnglish('Mangoes are my favorite fruit.'), "Mangoes are my <span class=\'highlight\'>favourite</span> fruit.");
+      done();
+    });
+
+    test('I ate...', function(done) {
+      assert.equal(translator.toEnglish('I ate yogurt for breakfast.'), "I ate <span class=\'highlight\'>yoghurt</span> for breakfast.");
+      done();
+    });
+
+    test('We watched...', function(done) {
+      assert.equal(translator.toAmerican("We watched the footie match for a while."), "We watched the <span class=\'highlight\'>soccer</span> match for a while.");
+      done();
+    });
+
+    test('Paracetamol...', function(done) {
+      assert.equal(translator.toAmerican("Paracetamol takes up to an hour to work."), "<span class=\'highlight\'>Tylenol</span> takes up to an hour to work.");
       done();
     });
 

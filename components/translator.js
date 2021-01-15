@@ -55,11 +55,13 @@ function translateBackwards(string, fromTo) {
 function convertTime(string) {
   let conversion = string;
   let americanTimeMatches = /([0-2]?[1-9]):([0-5]\d)/gm;
-  let englishTimeMatches = /(?<=\d)\.(?=\d\d)/ig;
+  let englishTimeMatches = /([0-2]?[1-9])\.([0-5]\d)/gm;
   if (americanTimeMatches.test(string)) {
-    conversion = string.replace(americanTimeMatches, '$1'+'.'+'$2');
+    let newHighlightedTime = "<span class='highlight'>"+'$1'+'.'+'$2'+"</span>";
+    conversion = string.replace(americanTimeMatches, newHighlightedTime);
   } else if (englishTimeMatches.test(string)) {
-    conversion = string.replace(englishTimeMatches, ':');
+    let newHighlightedTime = "<span class='highlight'>"+'$1'+':'+'$2'+"</span>";
+    conversion = string.replace(englishTimeMatches, newHighlightedTime);
   }
   return conversion;
 }

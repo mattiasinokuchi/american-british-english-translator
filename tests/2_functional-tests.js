@@ -43,13 +43,12 @@ suite('Functional Tests', () => {
     chai.request(server)
     .post('/api/translate')
     .send({
-      text: "",
       locale: "american-to-british"
     })
     .end(function (err, res) {
       assert.equal(res.status, 200);
       assert.isObject(res.body, true);
-      assert.deepEqual(res.body, { error: 'No text to translate' });
+      assert.deepEqual(res.body, { error: 'Required field(s) missing' });
       done();
     });
   });
@@ -59,12 +58,26 @@ suite('Functional Tests', () => {
     .post('/api/translate')
     .send({
       text: "Mangoes are my favorite fruit.",
-      locale: ""
     })
     .end(function (err, res) {
       assert.equal(res.status, 200);
       assert.isObject(res.body, true);
       assert.deepEqual(res.body, { error: 'Required field(s) missing' });
+      done();
+    });
+  });
+
+  test('Empty text', function(done) {
+    chai.request(server)
+    .post('/api/translate')
+    .send({
+      text: "",
+      locale: "american-to-british"
+    })
+    .end(function (err, res) {
+      assert.equal(res.status, 200);
+      assert.isObject(res.body, true);
+      assert.deepEqual(res.body, { error: 'No text to translate' });
       done();
     });
   });

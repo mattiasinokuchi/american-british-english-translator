@@ -17,9 +17,10 @@ suite('Functional Tests', () => {
       locale: "american-to-british"
     })
     .end(function (err, res) {
+      //console.log(res.body);
       assert.equal(res.status, 200);
       assert.isObject(res.body, true);
-      assert.equal(res.body.translation, "Mangoes are my <span class='highlight'>favourite</span> fruit.");
+      assert.equal(res.body.translation, 'Mangoes are my <span class="highlight">favourite</span> fruit.');
       done();
     });
   });
@@ -78,6 +79,21 @@ suite('Functional Tests', () => {
       assert.equal(res.status, 200);
       assert.isObject(res.body, true);
       assert.deepEqual(res.body, { error: 'No text to translate' });
+      done();
+    });
+  });
+
+  test('Needs no translation', function(done) {
+    chai.request(server)
+    .post('/api/translate')
+    .send({
+      text: "I ate one sandwich for breakfast.",
+      locale: "british-to-american"
+    })
+    .end(function (err, res) {
+      assert.equal(res.status, 200);
+      assert.isObject(res.body, true);
+      assert.equal(res.body.translation, "Everything looks good to me!");
       done();
     });
   });
